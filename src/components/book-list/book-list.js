@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import BookListItem from "../book-list-item/book-list-item";
 import {connect} from 'react-redux';
-import {withBookstoreService} from "../hoc"
-
-
+import {withBookstoreService} from "../hoc";
+import {booksLoaded} from "../../actions/index";
+import {compose} from "../../utils"
 import "./book-list.css"
 
 
@@ -35,12 +35,10 @@ class BookList extends Component {
 const MSTP = ({books}) => {
     return {books}
 }
-const MDTP = (dispatch) => {
-    return {
-        booksLoaded: (newBooks) => {
-            dispatch({type: "BOOKS_LOADED", payload: newBooks})
-        }
-    }
-}
+const MDTP = {booksLoaded}
 
-export default withBookstoreService()(connect(MSTP, MDTP)(BookList))
+export default compose(
+    withBookstoreService(),
+    connect(MSTP, MDTP),
+)(BookList)
+// export default withBookstoreService()(connect(MSTP, MDTP)(BookList))
