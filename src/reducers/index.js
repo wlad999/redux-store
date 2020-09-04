@@ -1,5 +1,16 @@
 const initialState = {
-    books: []
+    books: [
+        {
+            id: 1,
+            title: 'KJBIUBIU',
+            author: 'JHUYGYGU'
+        },
+        {
+            id: 2,
+            title: 'KJBIUGKJNK',
+            author: 'VHGDTEST'
+        }
+    ]
 }
 
 

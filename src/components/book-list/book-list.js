@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-import "./book-list.css"
 import BookListItem from "../book-list-item/book-list-item";
+import {connect} from 'react-redux'
 
-export default class BookList extends Component {
+import "./book-list.css"
 
 
+class BookList extends Component {
     render() {
         const {books} = this.props
         return (
@@ -18,3 +19,9 @@ export default class BookList extends Component {
         )
     }
 }
+
+const MSTP = ({books}) => {
+    return {books}
+}
+
+export default connect(MSTP)(BookList)
