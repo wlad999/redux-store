@@ -12,9 +12,10 @@ import ErrorIndicator from "../error-indicator";
 class BookList extends Component {
 
     componentDidMount() {
-        const {bookstoreService, booksLoaded, booksRequested, booksError} = this.props
-        booksRequested()
-        bookstoreService.getBooks().then((data) => booksLoaded(data)).catch((err) => booksError(err))
+        this.props.fetchBooks()
+        // const {bookstoreService, booksLoaded, booksRequested, booksError} = this.props
+        // booksRequested()
+        // bookstoreService.getBooks().then((data) => booksLoaded(data)).catch((err) => booksError(err))
     }
 
 
@@ -42,7 +43,17 @@ class BookList extends Component {
 const MSTP = ({books, loading, error}) => {
     return {books, loading, error}
 }
-const MDTP = {booksLoaded, booksRequested, booksError}
+const MDTP = (dispatch, ownProps) => {
+    const {bookstoreService} = ownProps
+    return {
+        fetchBooks: () => {
+            dispatch(booksRequested())
+            bookstoreService.getBooks().then((data) => dispatch(booksLoaded(data))).catch((err) => dispatch(booksError(err)))
+
+        }
+    }
+}
+// const MDTP = {booksLoaded, booksRequested, booksError}
 
 export default compose(
     withBookstoreService(),
