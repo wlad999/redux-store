@@ -8,7 +8,7 @@ const ShopHeader = ({numItems, total}) => {
             <Link className="logo text-dark" to="/">
                 <div className="logo text-dark">ReStore</div>
             </Link>
-            <Link to="/">
+            <Link to="/cart">
                 <div className="shopping-cart">
                     <i className="cart-icon fa fa-shopping-cart"/>
                     {numItems} items (${total})

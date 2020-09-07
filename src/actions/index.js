@@ -4,4 +4,10 @@ const booksLoaded = (newBooks) => {
         payload: newBooks
     }
 }
-export {booksLoaded}
+
+const booksRequested = () => {
+    return {
+        type: "BOOKS_REQUESTED"
+    }
+}
+export {booksLoaded, booksRequested}
