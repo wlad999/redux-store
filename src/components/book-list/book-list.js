@@ -2,26 +2,30 @@ import React, {Component} from "react";
 import BookListItem from "../book-list-item/book-list-item";
 import {connect} from 'react-redux';
 import {withBookstoreService} from "../hoc";
-import {booksLoaded, booksRequested} from "../../actions/index";
+import {booksLoaded, booksRequested, booksError} from "../../actions/index";
 import {compose} from "../../utils"
 import Spinner from "../spinner/spinner"
 import "./book-list.css"
+import ErrorIndicator from "../error-indicator";
 
 
 class BookList extends Component {
 
     componentDidMount() {
-        const {bookstoreService, booksLoaded, booksRequested} = this.props
+        const {bookstoreService, booksLoaded, booksRequested, booksError} = this.props
         booksRequested()
-        bookstoreService.getBooks().then((data) => booksLoaded(data))
+        bookstoreService.getBooks().then((data) => booksLoaded(data)).catch((err) => booksError(err))
     }
 
 
     render() {
 
-        const {books, loading} = this.props
+        const {books, loading, error} = this.props
         if (loading) {
             return <Spinner/>
+        }
+        if (error) {
+            return <ErrorIndicator/>
         }
         return (
             <ul className="book-list">
@@ -35,10 +39,10 @@ class BookList extends Component {
     }
 }
 
-const MSTP = ({books, loading}) => {
-    return {books, loading}
+const MSTP = ({books, loading, error}) => {
+    return {books, loading, error}
 }
-const MDTP = {booksLoaded, booksRequested}
+const MDTP = {booksLoaded, booksRequested, booksError}
 
 export default compose(
     withBookstoreService(),
