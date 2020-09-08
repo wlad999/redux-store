@@ -7,6 +7,7 @@ import {compose} from "../../utils"
 import Spinner from "../spinner/spinner"
 import "./book-list.css"
 import ErrorIndicator from "../error-indicator";
+import {bindActionCreators} from "redux";
 
 
 const BookList = ({books, onAddedToCart}) => {
@@ -54,10 +55,12 @@ const MSTP = ({bookList: {books, loading, error}}) => {
     return {books, loading, error}
 }
 const MDTP = (dispatch, {bookstoreService}) => {
-    return {
-        fetchBooks: fetchBooks(dispatch, bookstoreService),
-        onAddedToCart: (id) => dispatch(bookAddedToCart(id))
-    }
+    return bindActionCreators({
+        // fetchBooks: fetchBooks(dispatch, bookstoreService),
+        // fetchBooks: () => dispatch(fetchBooks(bookstoreService)()),
+        fetchBooks: fetchBooks(bookstoreService),
+        onAddedToCart: bookAddedToCart
+    }, dispatch)
 }
 // const MDTP = {booksLoaded, booksRequested, booksError}
 
