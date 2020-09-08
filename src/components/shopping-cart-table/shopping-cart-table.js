@@ -1,6 +1,7 @@
 import React from 'react';
 import './shopping-cart-table.css';
 import {connect} from "react-redux";
+import {bookRemovedFromCart, allBookRemovedFromCart, bookAddedToCart} from '../../actions'
 
 const ShoppingCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => {
 
@@ -67,12 +68,10 @@ const MSTP = ({cartItems, orderTotal}) => {
     }
 }
 
-const MDTP = () => {
-    return {
-        onIncrease: (id) => console.log(`Increase${id}`),
-        onDecrease: (id) => console.log(`Decrease${id}`),
-        onDelete: (id) => console.log(`Delete${id}`),
-    }
+const MDTP = {
+    onDelete: allBookRemovedFromCart,
+    onDecrease: bookRemovedFromCart,
+    onIncrease: bookAddedToCart
 }
 
 export default connect(MSTP, MDTP)(ShoppingCartTable);
