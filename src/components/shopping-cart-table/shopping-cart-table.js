@@ -61,7 +61,7 @@ const ShoppingCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => 
         </div>
     )
 }
-const MSTP = ({cartItems, orderTotal}) => {
+const MSTP = ({shoppingCart: {cartItems, orderTotal}}) => {
     return {
         items: cartItems,
         total: orderTotal

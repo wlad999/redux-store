@@ -50,7 +50,7 @@ class BookListContainer extends Component {
     }
 }
 
-const MSTP = ({books, loading, error}) => {
+const MSTP = ({bookList: {books, loading, error}}) => {
     return {books, loading, error}
 }
 const MDTP = (dispatch, {bookstoreService}) => {
