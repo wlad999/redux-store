@@ -3,8 +3,10 @@ import './shopping-cart-table.css';
 import {connect} from "react-redux";
 
 const ShoppingCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => {
+
     const renderRow = (item, idx) => {
         const {id, name, count, total} = item
+        console.log("item", item)
         return (
             <tr key={id}>
                 <td>{idx + 1}</td>
